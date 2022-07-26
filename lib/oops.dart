@@ -1,29 +1,40 @@
 abstract class dog {
-  //abstract classed-cannot be instatiated
+  //abstract classed-cannot be instantiated
   int _legs = 4; //Encapsulation-private
+  void tail() {}
+  void legs() {}
+}
+
+class floof extends dog {
+  //inheritance
   void tail() {
     print("Has tail");
   }
 
   void legs() {
-    print("Has ${_legs} legs --dog");
-  }
-}
-
-class floof extends dog {
-  //inheritance
-  @override //polymorphism
-  void legs() {
-    print("Has ${super._legs} legs --floof");
+    print("Has ${super._legs} legs --dog");
   }
 }
 
 class whitefloof extends floof {
   //multilevel inheritance
+  @override //polymorphism
+  void legs() {
+    print("Has ${super._legs} legs --whitefloof");
+  }
+
   String color = "white";
 }
 
-class lab extends dog {}
+class lab extends dog {
+  void tail() {
+    print("Has tail");
+  }
+
+  void legs() {
+    print("Has ${super._legs} legs --dog");
+  }
+}
 
 main() {
   lab billy = new lab(); //instance or object of a class
