@@ -12,7 +12,7 @@ class floof extends dog {
   }
 
   void legs() {
-    print("Has ${super._legs} legs --dog");
+    print("Has ${super._legs} legs --floof");
   }
 }
 
@@ -32,7 +32,7 @@ class lab extends dog {
   }
 
   void legs() {
-    print("Has ${super._legs} legs --dog");
+    print("Has ${super._legs} legs --lab");
   }
 }
 
