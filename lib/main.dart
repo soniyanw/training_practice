@@ -45,10 +45,11 @@ class _MyAppState extends State<MyApp> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(35),
                     color: Colors.white,
-                    child: Consumer<MyModel>(
-                      builder: (context, myModel, child) {
+                    child: Selector<MyModel, Icon>(
+                      selector: (buildContext, myModel) => myModel.center,
+                      builder: (context, center, child) {
                         return FittedBox(
-                          child: myModel.center,
+                          child: center,
                           fit: BoxFit.fitWidth,
                         );
                       },
