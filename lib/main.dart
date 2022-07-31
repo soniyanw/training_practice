@@ -7,55 +7,105 @@ void main() => runApp(MaterialApp(
       home: MyApp(),
     ));
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MyModel>(
       create: (context) => MyModel(),
       child: MaterialApp(
         home: Scaffold(
-          appBar: AppBar(title: Text('PROVIDER')),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                  padding: const EdgeInsets.all(20),
-                  color: Colors.green[200],
-                  child: Consumer<MyModel>(
-                    builder: (context, myModel, child) {
-                      return TextButton(
-                        child: Text('Click Me'),
-                        onPressed: () {
-                          myModel.doSomething();
-                        },
-                      );
-                    },
-                  )),
-              Container(
-                padding: const EdgeInsets.all(35),
-                color: Colors.blue[200],
-                child: Consumer<MyModel>(
-                  builder: (context, myModel, child) {
-                    return Text(myModel.someValue);
-                  },
+            appBar: AppBar(
+              title: Text('PROVIDER'),
+              centerTitle: true,
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Container(
+                    child: Text("SELECT SHAPE AND PRESS THE BUTTON"),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(35),
+                    color: Colors.white,
+                    child: Consumer<MyModel>(
+                      builder: (context, myModel, child) {
+                        return FittedBox(
+                          child: myModel.center,
+                          fit: BoxFit.fitWidth,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            floatingActionButton:
+                Consumer<MyModel>(builder: (context, myModel, child) {
+              return MaterialButton(
+                  color: Colors.blue,
+                  onPressed: () {
+                    myModel.doSomething(_selectedIndex);
+                  },
+                  child: Text(
+                    "Change shape",
+                    style: TextStyle(color: Colors.white),
+                  ));
+            }),
+            bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(icon: Icon(Icons.mood), label: "Happy"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.cloud), label: "Cloud"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.sunny), label: "Sunny"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.diamond), label: "Diamond"),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.blue,
+              unselectedItemColor: Colors.grey,
+              onTap: _onItemTapped,
+            )),
       ),
     );
   }
 }
 
 class MyModel with ChangeNotifier {
-  String someValue = 'Hello';
-  void doSomething() {
-    if (someValue == 'Hello')
-      someValue = 'Bye';
-    else
-      someValue = 'Hello';
+  Icon center = Icon(Icons.mood);
+  void doSomething(int index) {
+    switch (index) {
+      case 0:
+        center = Icon(Icons.mood);
+        break;
+      case 1:
+        center = Icon(Icons.cloud);
+        break;
+      case 2:
+        center = Icon(Icons.sunny);
+        break;
+      case 3:
+        center = Icon(Icons.diamond);
+        break;
+    }
     notifyListeners();
   }
 }
