@@ -27,10 +27,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       vsync: this,
     )..repeat();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 2))
-          ..repeat();
-    color = ColorTween(begin: Colors.pink[100], end: Colors.white).animate(
-        CurvedAnimation(parent: _animationController, curve: Curves.bounceOut));
+        AnimationController(vsync: this, duration: Duration(seconds: 1))
+          ..repeat(reverse: true);
+    color = ColorTween(begin: Colors.pink[100], end: Colors.white)
+        .animate(_animationController);
+    //CurvedAnimation(parent: _animationController, curve: Curves.bounceOut)
     _animationController.addListener(() {
       setState(() {});
     });
