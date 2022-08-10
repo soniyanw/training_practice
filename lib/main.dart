@@ -70,6 +70,7 @@ class DemoPainter extends CustomPainter {
 
     canvas.drawLine(
         Offset(2, size.height), Offset(size.width, size.height), paint1);
+
     canvas.drawArc(
       Rect.fromCenter(
         center: Offset((size / 4.5).width, 135),
