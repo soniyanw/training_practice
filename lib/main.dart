@@ -33,12 +33,6 @@ class DemoPainter extends CustomPainter {
     var paint2 = Paint()..color = Colors.yellow;
     var paint3 = Paint()..color = Colors.white;
 
-    var path = Path();
-    path.moveTo(200, 200);
-    path.lineTo(200, 200);
-    path.lineTo(200, 200);
-    path.close();
-
     canvas.drawRect(
         Offset((size / 2).width, (size / 6).height) & const Size(100, 400),
         paint1);
@@ -66,21 +60,19 @@ class DemoPainter extends CustomPainter {
         Offset(((size / 4) * 3).width, (size / 3.5).height), 20.0, paint2);
     canvas.drawCircle(
         Offset(((size / 4) * 3).width, (size / 1.9).height), 20.0, paint2);
-    canvas.drawPath(path, Paint()..color = Colors.green);
-
     canvas.drawLine(
         Offset(2, size.height), Offset(size.width, size.height), paint1);
 
     canvas.drawArc(
       Rect.fromCenter(
-        center: Offset((size / 4.5).width, 135),
+        center: Offset((size / 4.5).width, 135), //widget position
         width: 50,
         height: 50,
-      ),
-      1.6,
-      2 * 3.14 - 2,
+      ), //total widget as a rectangle inside which the arc will be drawn
+      1.6, //arc starting
+      2 * 3.14 - 2, //arc ending
       true,
-      paint1,
+      paint1, //color
     );
   }
 
