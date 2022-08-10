@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,81 +13,78 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late AnimationController _animationController;
-  late Animation color;
-  int dir = 0;
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    )..repeat();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(seconds: 1))
-          ..repeat(reverse: true);
-    color = ColorTween(begin: Colors.pink[100], end: Colors.white)
-        .animate(_animationController);
-    //CurvedAnimation(parent: _animationController, curve: Curves.bounceOut)
-    _animationController.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    _animationController.dispose();
-    super.dispose();
-  }
-
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.pink,
-          title: Text("Animation"),
-        ),
-        body: AnimatedBuilder(
-          animation: _animationController,
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: color.value,
-            child: AnimatedBuilder(
-              animation: _controller,
-              child: Container(
-                width: 200.0,
-                height: 200.0,
-                child: Image(image: AssetImage("assets/images.jpeg")),
-              ),
-              builder: (BuildContext context, Widget? child) {
-                return Transform.rotate(
-                  angle: dir == 1
-                      ? _controller.value * 2 * pi
-                      : _controller.value * -2 * pi,
-                  child: child,
-                );
-              },
-            ),
-          ),
-          builder: (context, child) {
-            return Container(
-              child: child,
-            );
-          },
-        ),
-        floatingActionButton: MaterialButton(
-          color: Colors.pink,
-          child: Text(
-            "Change Direction",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            dir = dir == 1 ? 0 : 1;
-            setState(() {});
-          },
+    return Container(
+        color: Colors.white,
+        child: CustomPaint(
+          child: Container(),
+          painter: DemoPainter(),
         ));
+  }
+}
+
+class DemoPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()..color = Colors.red;
+    var paint1 = Paint()..color = Colors.green;
+    var paint2 = Paint()..color = Colors.yellow;
+    var paint3 = Paint()..color = Colors.white;
+
+    var path = Path();
+    path.moveTo(200, 200);
+    path.lineTo(200, 200);
+    path.lineTo(200, 200);
+    path.close();
+
+    canvas.drawRect(
+        Offset((size / 2).width, (size / 6).height) & const Size(100, 400),
+        paint1);
+    canvas.drawRect(
+        Offset((size / 4).width, (size / 6).height) & const Size(100, 400),
+        paint);
+    canvas.drawRect(
+        Offset((size / 3).width, (size / 4.8).height) & const Size(50, 50),
+        paint2);
+    canvas.drawRect(
+        Offset((size / 3).width, (size / 3.2).height) & const Size(50, 50),
+        paint2);
+    canvas.drawRect(
+        Offset((size / 3).width, (size / 2.4).height) & const Size(50, 50),
+        paint2);
+    canvas.drawRect(
+        Offset((size / 3.2).width, (size / 1.9).height) & const Size(60, 60),
+        paint3);
+
+    canvas.drawCircle(
+        Offset(((size / 4) * 3).width, (size / 3.5).height), 50.0, paint);
+    canvas.drawCircle(
+        Offset(((size / 4) * 3).width, (size / 1.9).height), 50.0, paint);
+    canvas.drawCircle(
+        Offset(((size / 4) * 3).width, (size / 3.5).height), 20.0, paint2);
+    canvas.drawCircle(
+        Offset(((size / 4) * 3).width, (size / 1.9).height), 20.0, paint2);
+    canvas.drawPath(path, Paint()..color = Colors.green);
+
+    canvas.drawLine(
+        Offset(2, size.height), Offset(size.width, size.height), paint1);
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: Offset((size / 4.5).width, 135),
+        width: 50,
+        height: 50,
+      ),
+      1.6,
+      2 * 3.14 - 2,
+      true,
+      paint1,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
