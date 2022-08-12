@@ -37,7 +37,7 @@ class _ListPageState extends State<ListPage> {
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
-        title: Text('Todo-Provider'),
+        title: Text('My todos'),
         centerTitle: true,
       ),
       body:
