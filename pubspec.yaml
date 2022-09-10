@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.0.1
-  drift: ^1.7.0
+  drift: ^2.1.0
   sqlite3_flutter_libs: ^0.5.0
   path_provider: ^2.0.0
   path:
@@ -43,8 +43,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  drift_dev: ^1.6.0
-  build_runner: ^2.1.10
+  drift_dev: ^2.1.0
+  build_runner: ^2.2.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
