@@ -71,7 +71,7 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                 onAccept: (Color color) {
                   setState(() {
                     value = color;
-                    str = "I'm Here now";
+                    str = "Occupied";
                   });
                 },
               )
