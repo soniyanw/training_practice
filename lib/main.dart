@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:practice/sliverappbar.dart';
+import 'package:practice/sliverbar_task.dart';
 
 Future<void> main() async {
   runApp(MaterialApp(
-    home: SliverBarPrac(),
+    home: Sliverbar(),
   ));
 }
