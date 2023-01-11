@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:practice/sliverbar_task.dart';
+import 'package:practice/rive_animation.dart';
 
 Future<void> main() async {
   runApp(MaterialApp(
-    home: Sliverbar(),
+    home: LiquidDownload(),
   ));
 }
